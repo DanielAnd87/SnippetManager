@@ -21,6 +21,21 @@ namespace EmployeeManager.DataAccess
             }
         }
 
+        public List<Snippet> GetSnippetByQuery(int folderId, string searchQuery)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal()))
+            {
+                searchQuery = '%' + searchQuery + '%';
+                var parameters = new DynamicParameters(new { 
+                    folderId,
+                    searchQuery
+                });
+                string sql = "select * from Snippet WHERE [Name] LIKE @searchQuery AND FolderId = @folderId";
+                var output = Enumerable.ToList(connection.Query<Snippet>(sql, parameters));
+                return output;
+            }
+        }
+
         public List<Snippet> GetSnippet()
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal()))

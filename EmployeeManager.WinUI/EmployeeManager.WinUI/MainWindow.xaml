@@ -135,9 +135,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBox Grid.Column="0" Header="Search" Margin="10"
-                     Text="{x:Bind ViewModel.SelectedFolder.FilterText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            <!-- <Button Grid.Row="1" Content="New snippet" Click="{x:Bind ViewModel.InsertNewSnippet}" Margin="10" /> -->
+            <AutoSuggestBox PlaceholderText="Search" QueryIcon="Find" Width="200"
+                            TextChanged="AutoSuggestBox_TextChanged"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                            SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
             <ListView Grid.Row="1" x:Name="SnippetListView"
                       ItemsSource="{x:Bind ViewModel.Snippets,Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedSnippet,Mode=TwoWay}"

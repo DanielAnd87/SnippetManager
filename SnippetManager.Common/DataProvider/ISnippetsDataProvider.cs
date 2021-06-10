@@ -8,6 +8,7 @@ namespace EmployeeManager.DataAccess
         void ChangeFragmentLanguage(int fragmentId, int languageId);
         void ChangeSnippetDescripion(int snippetId, string description);
         void ChangeSnippetName(int snippetId, string description);
+        List<Snippet> GetSnippetByQuery(int folderId, string searchQuery);
         void ChangeTagName(int tagId, string name);
         void ChooseALanguage(bool selection, int languageId);
         void DeleteFragment(int fragmentId);

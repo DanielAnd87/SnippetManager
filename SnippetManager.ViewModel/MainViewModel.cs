@@ -76,6 +76,25 @@ namespace EmployeeManager.ViewModel
             }
         }
 
+        public void UpdateSnippetsByQuery(string query)
+        {
+            if (_selectedFolder != null)
+            {
+                List<Snippet> snippets = _snippetsDataProvider.GetSnippetByQuery(_selectedFolder.FolderId, query);
+                _selectedFolder.SnippetList = snippets;
+
+                Snippets.Clear();
+                SnippetsCache.Clear();
+                foreach (var snippet in _selectedFolder.SnippetList)
+                {
+                    Snippets.Add(new SnippetViewModel(snippet, _snippetsDataProvider));
+                    SnippetsCache.Add(new SnippetViewModel(snippet, _snippetsDataProvider));
+                }
+
+                RaisePropertyChanged();
+            }
+        }
+
         public LanguageViewModel SelectedLanguage
         {
             get => _selectedLanguage;

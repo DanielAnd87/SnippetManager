@@ -86,7 +86,11 @@
 
 
         <!--Folders-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="FolderGrid">
+            <Grid.KeyboardAccelerators>
+                <KeyboardAccelerator Key="F" Modifiers="Control" Invoked="NavToSnippetSearch"  /> 
+                <KeyboardAccelerator Key="E" Modifiers="Control" Invoked="NavToEditor"  /> 
+            </Grid.KeyboardAccelerators>
 
 
             <Grid.RowDefinitions>
@@ -129,7 +133,11 @@
         </Grid>
 
         <!--Snippets-->
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="SnippetGrid">
+            <Grid.KeyboardAccelerators>
+                <KeyboardAccelerator Key="L" Invoked="NavToSnippetList"  /> 
+                <KeyboardAccelerator Key="H" Invoked="NavToFolderList"  /> 
+            </Grid.KeyboardAccelerators>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -197,7 +205,7 @@
             </Grid>
 
 
-            <TextBox Grid.Row="3" Header="Code" Margin="10"
+            <TextBox Grid.Row="3" x:Name="EditorTextbox" Header="Code" Margin="10"
                      Text="{x:Bind ViewModel.SelectedFragment.Code,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>

@@ -28,10 +28,24 @@ namespace EmployeeManager.WinUI
         private bool folderEdit = false;
         private List<SnippetViewModel> _snippetViewModels;
 
-        private List<SnippetViewModel> getFilterdSnippetList()
+        private void NavToEditor(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            return _snippetViewModels;
-            return ViewModel.Snippets.Where(snippet => snippet.Name.Contains("test")).ToList();
+            EditorTextbox.Focus(FocusState.Programmatic);
+        }
+
+        private void NavToFolderList(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            FolderGrid.Focus(FocusState.Programmatic);
+        }
+
+        private void NavToSnippetList(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            SnippetListView.Focus(FocusState.Programmatic);
+        }
+
+        private void NavToSnippetSearch(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            SnippetGrid.Focus(FocusState.Programmatic);
         }
 
         public MainWindow()
@@ -41,6 +55,10 @@ namespace EmployeeManager.WinUI
             this.Activated += MainWindow_Activated;
         }
 
+        //private void FocusFolders(object sender, RoutedEventArgs e)
+        //{
+            //FolderGrid.Focus(FocusState.Programmatic);
+        //}
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             if (ViewModel.Folders.Count == 0)

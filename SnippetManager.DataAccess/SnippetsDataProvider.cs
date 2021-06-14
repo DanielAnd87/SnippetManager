@@ -197,7 +197,7 @@ namespace EmployeeManager.DataAccess
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal()))
             {
-                connection.Execute("dbo.Snippet_AddLanguage @Name", new Language {Name = "test"});
+                connection.Execute("dbo.Snippet_AddLanguage @Name", new Language {Name = "..."});
             }
         }
 
@@ -230,7 +230,7 @@ namespace EmployeeManager.DataAccess
 
         public Snippet InsertEmptySnippet(int folderId, int langId)
         {
-            Snippet newSnippet = new Snippet() {Name = "test ", FolderId = folderId};
+            Snippet newSnippet = new Snippet() {Name = "...", FolderId = folderId};
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal()))
             {
                 var parameters = new DynamicParameters(newSnippet);

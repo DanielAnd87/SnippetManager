@@ -90,6 +90,7 @@
             <Grid.KeyboardAccelerators>
                 <KeyboardAccelerator Key="F" Modifiers="Control" Invoked="NavToSnippetSearch"  /> 
                 <KeyboardAccelerator Key="E" Modifiers="Control" Invoked="NavToEditor"  /> 
+                <KeyboardAccelerator Key="E" Modifiers="Menu" Invoked="NavToCodeNameEditor"  /> 
             </Grid.KeyboardAccelerators>
 
 
@@ -133,10 +134,10 @@
         </Grid>
 
         <!--Snippets-->
-        <Grid Grid.Column="1" Grid.Row="1" x:Name="SnippetGrid">
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="SnippetGrid" Margin="5">
             <Grid.KeyboardAccelerators>
-                <KeyboardAccelerator Key="L" Invoked="NavToSnippetList"  /> 
-                <KeyboardAccelerator Key="H" Invoked="NavToFolderList"  /> 
+                <KeyboardAccelerator Key="L" Modifiers="Control" Invoked="NavToSnippetList"  /> 
+                <KeyboardAccelerator Key="H" Modifiers="Control" Invoked="NavToFolderList"  /> 
             </Grid.KeyboardAccelerators>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -147,14 +148,14 @@
                             TextChanged="AutoSuggestBox_TextChanged"
                             QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                             SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
-            <ListView Grid.Row="1" x:Name="SnippetListView"
+            <ListView Grid.Row="1" x:Name="SnippetListView" Margin="4"
                       ItemsSource="{x:Bind ViewModel.Snippets,Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedSnippet,Mode=TwoWay}"
                       DisplayMemberPath="Name" />
         </Grid>
 
         <!--MainArea-->
-        <Grid Grid.Row="1" Grid.Column="2"
+        <Grid Grid.Row="1" Grid.Column="2" Margin="1"
               Visibility="{x:Bind ViewModel.IsSnippetSelected,Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -165,7 +166,7 @@
                 <!-- <RowDefinition/> -->
             </Grid.RowDefinitions>
 
-            <TextBox Header="Name" Margin="10"
+            <TextBox Header="Name" Margin="10" x:Name="CodeNameTextbox"
                      Text="{x:Bind ViewModel.SelectedSnippet.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
             <Grid Grid.Row="1">
@@ -205,7 +206,7 @@
             </Grid>
 
 
-            <TextBox Grid.Row="3" x:Name="EditorTextbox" Header="Code" Margin="10"
+            <TextBox Grid.Row="3" x:Name="EditorTextbox" Header="Code" Margin="10" TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="False"
                      Text="{x:Bind ViewModel.SelectedFragment.Code,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>

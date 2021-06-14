@@ -35,12 +35,32 @@ namespace EmployeeManager.WinUI
 
         private void NavToFolderList(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
+            if(ViewModel.SelectedFolder == null)
+            {
+                if(ViewModel.Folders.Count > 0)
+                {
+                    ViewModel.SelectedFolder = ViewModel.Folders[0];
+                }
+            }
             FolderGrid.Focus(FocusState.Programmatic);
+        }
+
+        private void NavToCodeNameEditor(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            CodeNameTextbox.Focus(FocusState.Programmatic);
         }
 
         private void NavToSnippetList(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
             SnippetListView.Focus(FocusState.Programmatic);
+
+            if(ViewModel.SelectedSnippet == null)
+            {
+                if(ViewModel.Snippets.Count > 0)
+                {
+                    ViewModel.SelectedSnippet = ViewModel.Snippets[0];
+                }
+            }
         }
 
         private void NavToSnippetSearch(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)

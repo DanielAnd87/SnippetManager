@@ -69,6 +69,11 @@ namespace EmployeeManager.ViewModel
                         SnippetsCache.Add(new SnippetViewModel(snippet, _snippetsDataProvider));
                     }
 
+                    if(Snippets.Count > 0)
+                    {
+                        SelectedSnippet = Snippets[0];
+                    }
+
                     //todo: I could load the Snippet list here instead of in the beginning.
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(IsFolderSelected));

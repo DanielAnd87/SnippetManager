@@ -227,6 +227,23 @@ namespace EmployeeManager.DataAccess
 
             return newSnippet;
         }
+        public Snippet InsertSnippet(int folderId, string code, int langId)
+        {
+            String name = code.Length > 10 ? code.Substring(0, 9) : code;
+            var newSnippet = new { Name = name, Code = code, FolderId = folderId, LanguageId = langId };
+            int snippetId;
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal()))
+            {
+                var parameters = new DynamicParameters(newSnippet);
+                snippetId = connection.ExecuteScalar<int>("dbo.Snippet_AddSnippetWithCode @Name, @Code, @FolderId",
+                    parameters);
+                string lastInsertedSnippetId = "SELECT IDENT_CURRENT('Snippet')";
+                snippetId = connection.QuerySingle<int>(lastInsertedSnippetId);
+                Console.WriteLine(newSnippet.Name);
+            }
+
+            return new Snippet() { FolderId = folderId, Name = name, SnippetId = snippetId };
+        }
 
         public Snippet InsertEmptySnippet(int folderId, int langId)
         {

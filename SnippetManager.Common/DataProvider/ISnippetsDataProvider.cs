@@ -11,6 +11,8 @@ namespace EmployeeManager.DataAccess
         List<Snippet> GetSnippetByQuery(int folderId, string searchQuery);
         void ChangeTagName(int tagId, string name);
         void ChooseALanguage(bool selection, int languageId);
+        Snippet InsertSnippet(int folderId, string code, int langId);
+
         void DeleteFragment(int fragmentId);
         void DeleteSnippet(int snippetId);
         void DeleteTag(int tagId);

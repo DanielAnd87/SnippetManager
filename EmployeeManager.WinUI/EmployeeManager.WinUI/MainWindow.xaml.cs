@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.ApplicationModel.DataTransfer;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -62,6 +63,29 @@ namespace EmployeeManager.WinUI
                 }
             }
         }
+        private async void Clipboard_Content()
+        {
+            try
+            {
+                string text = "";
+
+                DataPackageView dataPackageView = Clipboard.GetContent();
+                text = await dataPackageView.GetTextAsync();
+                if (ViewModel.InsertNewSnippet(text))
+                {
+
+            CodeNameTextbox.Focus(FocusState.Programmatic);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void CreateSnippetFromClipboard(object sender, RoutedEventArgs e)
+        {
+            Clipboard_Content();
+        }
 
         private void NavToSnippetSearch(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
@@ -87,12 +111,7 @@ namespace EmployeeManager.WinUI
             }
         }
 
-        private void CreateSnippetFromClipboard(object sender, RoutedEventArgs e)
-        {
-            ViewModel.InsertNewSnippet();
-        }
-
-        private void DuplicateSnippet(object sender, RoutedEventArgs e)
+          private void DuplicateSnippet(object sender, RoutedEventArgs e)
         {
             ViewModel.InsertDuplicateSnippet();
         }
@@ -114,7 +133,11 @@ namespace EmployeeManager.WinUI
 
         private void CreateSnippet(object sender, RoutedEventArgs e)
         {
-            ViewModel.InsertNewSnippet();
+            if (ViewModel.InsertNewSnippet())
+            {
+                CodeNameTextbox.Focus(FocusState.Programmatic);
+            }
+            
         }
 
 // Handles the Click event on the Button on the page and opens the Popup. 

@@ -265,6 +265,19 @@ namespace EmployeeManager.ViewModel
             RaisePropertyChanged(nameof(IsSnippetSelected));
             return true;
         }
+        public bool InsertNewSnippet(string code)
+        {
+            Snippet newSnippet =
+                _snippetsDataProvider.InsertSnippet(SelectedFolder.FolderId, code, SelectedFolder.DefaultLanguage);
+            if (newSnippet == null || newSnippet.SnippetId == -1)
+            {
+                return false;
+            }
+            SnippetViewModel snippetViewModel = new SnippetViewModel(newSnippet, code, _snippetsDataProvider, _languages);
+            Snippets.Add(snippetViewModel);
+            SelectedSnippet = snippetViewModel;
+            return true;
+        }
 
 
         public bool InsertDuplicateSnippet()

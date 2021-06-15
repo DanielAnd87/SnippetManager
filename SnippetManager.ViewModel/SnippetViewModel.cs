@@ -16,6 +16,16 @@ namespace EmployeeManager.ViewModel
             _snippetsDataProvider = snippetsDataProvider;
         }
 
+        public SnippetViewModel(Snippet snippet, string code, ISnippetsDataProvider snippetsDataProvider, List<Language> languages)
+        {
+            _snippet = new SnippetLoaded(snippet);
+            _snippetsDataProvider = snippetsDataProvider;
+
+            Fragment newFragment = new Fragment() { Code = code, LanguageId = 1, SnippetId = snippet.SnippetId, FragmentId = -1 };
+            Fragments = new ObservableCollection<FragmentViewModel>();
+            Fragments.Add(new FragmentViewModel(newFragment, languages, snippetsDataProvider));
+        }
+
         public int FolderId
         {
             get => _snippet.FolderId;
